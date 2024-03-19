@@ -78,7 +78,11 @@ for turn in range(m):
     #산타 움직임
     for santa in santas:
         s_idx, sr, sc = santa
-        if stunned[s_idx]:
+        for x in range(1, n+1):
+            for y in range(1, n+1):
+                if board[x][y] == s_idx:
+                    sr, sc = x, y
+        if stunned[s_idx] or retired[s_idx]:
             continue
         arrow = -1
         min_dist = distance(dr, sr, dc, sc)
@@ -117,6 +121,4 @@ for turn in range(m):
     for idx in range(1, p+1):
         if not retired[idx]:
             scores[idx] += 1
-
-for i in range(1, p+1):
-    print(scores[i], end=' ')
+print(scores)
