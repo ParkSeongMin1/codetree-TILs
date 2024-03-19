@@ -121,4 +121,6 @@ for turn in range(m):
     for idx in range(1, p+1):
         if not retired[idx]:
             scores[idx] += 1
-print(scores)
+
+for i in range(1, p+1):
+    print(scores[i], end=' ')
