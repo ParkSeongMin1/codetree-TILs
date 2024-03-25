@@ -1,5 +1,5 @@
 n,m,k = map(int, input().split())
-dx, dy = [1,-1,0,0], [0,0,1,-1]
+dx, dy = [0,0,1,-1], [1,-1,0,0]
 board = []
 
 for _ in range(n):
@@ -72,8 +72,9 @@ for _ in range(k):
     move()
     if not people:
         break
-    #print(people)
+    # print(people)
     square = find_square()
+    # print(square)
     s_len, sx, sy = square
     before = []
     for x in range(sx, sx+s_len+1):
@@ -84,6 +85,8 @@ for _ in range(k):
     # before = before[::-1]
     after = list(zip(*before))
     after = after[::-1]
+    # if exit == (0,1):
+    #     print(after)
     new_board = []
     for b in board:
         temp = []
@@ -93,18 +96,29 @@ for _ in range(k):
         # print(temp)
     new_people = []
     moved_people = []
+    n_exit = 0
+    for p in people:
+        px, py = p
+        if sx <= px <= sx+s_len and sy <= py <= sy+s_len:
+            ax, ay = after[px-sx][py-sy]
+            new_people.append((ax, ay))
+            moved_people.append((px, py))
     for bx in range(sx, sx+s_len+1):
         for by in range(sy, sy+s_len+1):
             ax, ay = after[bx-sx][by-sy]
             # print(bx, by, ax, ay)
-            if (bx, by) in people:
-                new_people.append((ax, ay))
-                moved_people.append((bx, by))
-            elif (bx, by) == exit:
-                exit = (ax, ay)
+            # if (bx, by) in people:
+            #     new_people.append((ax, ay))
+            #     moved_people.append((bx, by))
+            if (bx, by) == exit:
+                # if exit == (0, 1):
+                #     print(ax, ay)
+                n_exit = (ax, ay)
+                new_board[ax][ay] = 0
             else:
                 # print(board[bx][by])
                 new_board[ax][ay] = max(0, board[bx][by] - 1)    
+    exit = n_exit
     temp = []
     for p in people:
         if p in moved_people:
@@ -117,9 +131,14 @@ for _ in range(k):
     board = new_board
     # for b in new_board:
     #     print(b)
+    # print()
     # print(people, exit)
+    # print()
 
     # print(after)
+
+# for b in new_board:
+#     print(b)
 
 print(moved)
 for i in exit:
