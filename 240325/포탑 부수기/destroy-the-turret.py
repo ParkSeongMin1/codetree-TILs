@@ -25,6 +25,8 @@ def set_attacker(time):
         for y in range(m):
             if board[x][y] > 0:
                 temp.append((board[x][y], last_attacked[x][y], x+y, y, x))
+    if len(temp) == 1:
+        return False
     temp.sort(key=lambda x : (x[0], -x[1], -x[2], -x[3]))
     last_attacked[temp[0][-1]][temp[0][-2]] = time
     board[temp[0][-1]][temp[0][-2]] += (n+m)
@@ -120,6 +122,8 @@ def bomb(attacker, attacked):
 
 for time in range(1, k+1):
     attacker = set_attacker(time)
+    if not attacker:
+        break
     attacked = set_attacked(attacker)
     # print(attacker, attacked)
     lazer(attacker, attacked)
