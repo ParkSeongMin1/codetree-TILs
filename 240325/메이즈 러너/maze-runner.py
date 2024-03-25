@@ -69,9 +69,9 @@ def find_square():
 
 for _ in range(k):
     #모든 사람 탈출
+    move()
     if not people:
         break
-    move()
     #print(people)
     square = find_square()
     s_len, sx, sy = square
