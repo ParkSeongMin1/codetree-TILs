@@ -112,7 +112,7 @@ def bomb(attacker, attacked):
             ny = m - 1
         if ny >= m:
             ny = 0
-        if board[nx][ny] == 0:
+        if board[nx][ny] == 0 or (nx, ny) == attacker:
             continue
         bombed.append((nx, ny))
         board[nx][ny] = max(board[nx][ny] - board[x1][y1] // 2, 0)
