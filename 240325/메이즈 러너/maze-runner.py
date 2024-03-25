@@ -41,7 +41,7 @@ def move():
             # if p == (0,0):
             #     print(nx, ny)
             #     print(distance(px, ex, py, ey), distance(nx, ex, ny, ey))
-            if distance(px, ex, py, ey) > distance(nx, ex, ny, ey) and not temp:
+            if distance(px, ex, py, ey) > distance(nx, ex, ny, ey):
                 temp = [nx, ny]
         if not temp:
             new_people.append((px, py))
