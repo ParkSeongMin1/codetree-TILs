@@ -43,6 +43,7 @@ def fight(idx1, idx2):
 def rotate(idx):
     global guns
     global players
+    global players_pos
     px, py, pd, ps, pg = players[idx]
     heapq.heappush(guns[px][py], -pg)
     for i in range(4):
@@ -53,7 +54,8 @@ def rotate(idx):
     heapq.heappush(guns[nx][ny], 0)
     pg = heapq.heappop(guns[nx][ny])
     players[idx] = (nx, ny, pd, ps, -pg)
-
+    players_pos[idx] = (nx, ny)
+    
 def winner_take_gun(idx):
     global guns
     global players
@@ -69,6 +71,7 @@ for _ in range(k):
         if out_of_range(nx, ny):
             pd = (pd+2) % 4
             nx, ny = px+dx[pd], py+dy[pd]
+        players_pos[pidx] = (nx, ny)
         players[pidx] = (nx, ny, pd, ps, pg)
         faught = False
         for pidx2 in range(m):
