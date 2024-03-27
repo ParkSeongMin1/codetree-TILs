@@ -81,10 +81,12 @@ while True:
         nx, ny = find_route(px,py,cx,cy)[1]
         if (nx, ny) == (cx, cy):
             people[idx] = 0
-            convis[idx] = 0
-            red[nx][ny] = True
             continue
         people[idx] = (nx, ny)
+    for idx in range(len(people)):
+        if people[idx] == 0:
+            cx, cy = convis[idx]
+            red[cx][cy] = True
     if time < m:
         base = set_convi(convis[time])
         bases.remove(base)
