@@ -42,6 +42,8 @@ def find_route(x1, y1, x2, y2):
             if (nx, ny) == (x2, y2):
                 break
             queue.append((nx, ny))
+    if visited[x2][y2] == False:
+        return False
     cx, cy = visited[x2][y2]
     route = [(x2, y2)]
     while True:
@@ -60,6 +62,8 @@ def set_convi(convi):
     for base in bases:
         bx, by = base
         route = find_route(bx,by,cx,cy)
+        if not route:
+            continue
         if len(route) < min_len:
             min_len = len(route)
             temp = [base]
